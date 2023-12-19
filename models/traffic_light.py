@@ -40,10 +40,8 @@ class TrafficLight:
         cycle_time_rand = random.random()
         cycle_time = light1.getCycleTime() if cycle_time_rand > thresh else light2.getCycleTime()
 
-        green_times1 = light1.getGreenTimes()
-        green_times2 = light2.getGreenTimes()
-
-        green_times = [a if random.random() > thresh else b for a, b in zip(green_times1, green_times2)]
+        green_times_rand = random.random()
+        green_times = light1.getGreenTimes() if green_times_rand > thresh else light2.getGreenTimes()
 
         return cls(light1.getLightId(), light1.getStateList(), offset_time, green_times, cycle_time)
 

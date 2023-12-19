@@ -26,7 +26,7 @@ class Individual:
             child1.setLightById(id, child1_light)
             child2.setLightById(id, child2_light)
 
-            return child1, child2
+        return child1, child2
         
     @classmethod
     def mutate(cls, individual):

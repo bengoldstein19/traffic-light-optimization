@@ -4,9 +4,8 @@ import traci
 import sys
 import xml.etree.ElementTree as ET
 
-def simulate(program):
-    print("FOOBAR")
-    traci.start([checkBinary(program), "-c", "sumo/simulation.sumocfg", "--tripinfo-output", "sumo/simulation_tripinfo.xml", "--no-warnings"])
+def simulate(program, input_cfg="sumo/simulation.sumocfg", output_tripinfo="sumo/simulation_tripinfo.xml"):
+    traci.start([checkBinary(program), "-c", input_cfg, "--tripinfo-output", output_tripinfo, "--no-warnings"])
     
     while traci.simulation.getMinExpectedNumber() > 0:
         traci.simulationStep()
@@ -14,7 +13,7 @@ def simulate(program):
     traci.close()
     sys.stdout.flush()
     
-    xmldoc = ET.parse('sumo/simulation_tripinfo.xml')
+    xmldoc = ET.parse(output_tripinfo)
 
     tripinfos = xmldoc.findall('tripinfo')
 
