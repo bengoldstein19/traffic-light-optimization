@@ -1,8 +1,8 @@
 import pickle
 from pyeasyga import pyeasyga
 
-
 from models.individual import Individual
+from utils import hyperparams
 
 
 def create_individual_fnc(data_):
@@ -12,10 +12,10 @@ def create_individual_fnc(data_):
 if __name__ == "__main__":
     initial_state = Individual()
     ga = pyeasyga.GeneticAlgorithm(None,
-                                   population_size=50,
-                                   generations=20,
-                                   crossover_probability=0.5,
-                                   mutation_probability=0.3)
+                                   population_size=hyperparams.POPULATION_SIZE,
+                                   generations=hyperparams.GENERATIONS,
+                                   crossover_probability=hyperparams.CROSSOVER_PROB,
+                                   mutation_probability=hyperparams.MUTATION_PROB)
 
     fitnesses = []
     ga.create_individual = create_individual_fnc

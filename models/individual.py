@@ -27,13 +27,20 @@ class Individual:
             child2.setLightById(id, child2_light)
 
         return child1, child2
+    
+    @classmethod
+    def mutate_light(cls, indiv):
+        mutation_id = random.choice(indiv.getSignalIds())
+        mutated_light = indiv.getLightById(mutation_id)
+        mutated_light.mutate()
         
     @classmethod
     def mutate(cls, individual):
-        mutation_id = random.choice(individual.getSignalIds())
-        mutated_light = individual.getLightById(mutation_id)
-        mutated_light.mutate()
-
+        Individual.mutate_light(individual)
+        mutation_prevalence = random.random() * 0.9
+        while random.random() < mutation_prevalence:
+            Individual.mutate_light(individual)
+        
     @staticmethod
     def getIdToStatesFromXML(xml_file='sumo/osm.net.xml') -> tuple[map]:
         states_by_id = {}

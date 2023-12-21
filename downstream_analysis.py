@@ -2,9 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pickle
 from statistics import mean, stdev
-
-GENERATIONS=25
-POPULATION_SIZE=75
+from utils import hyperparams
 
 
 if __name__ == "__main__":
@@ -15,13 +13,14 @@ if __name__ == "__main__":
     elite_fitnesses = []
     mean_fitnesses = []
     stdev_fitnesses = []
+    print(fitnesses)
 
     print("BEST FIT", min(*fitnesses) / 171)
 
-    for i in range(GENERATIONS):
-        generation_fitnesses.append(fitnesses[POPULATION_SIZE*i:(POPULATION_SIZE)*(i+1)])
+    for i in range(hyperparams.GENERATIONS):
+        generation_fitnesses.append(fitnesses[hyperparams.POPULATION_SIZE*i:(hyperparams.POPULATION_SIZE)*(i+1)])
 
-    for i in range(GENERATIONS):
+    for i in range(hyperparams.GENERATIONS):
         elite_fitnesses.append(min(generation_fitnesses[i]))
         mean_fitnesses.append(mean(generation_fitnesses[i]))
         stdev_fitnesses.append(stdev(generation_fitnesses[i]))
@@ -33,7 +32,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
 
     
-    t = np.linspace(1, GENERATIONS, GENERATIONS * POPULATION_SIZE)
+    t = np.linspace(1, hyperparams.GENERATIONS, hyperparams.GENERATIONS * hyperparams.POPULATION_SIZE)
     p1 = ax.plot(t, fitnesses, label='Fitness')
     p2 = ax.plot(elite_fitnesses,'bs', label='Elite Fitness')
     p3 = ax.plot(mean_fitnesses, 'ro', label='Mean Fitness')

@@ -79,7 +79,7 @@ class TrafficLight:
             else:
                 no_offset_individual.append((TrafficLight.TRANSITION_TIME, state))
         
-        return TrafficLight.addOffset(no_offset_individual, true_offset_time)
+        return [phase for phase in TrafficLight.addOffset(no_offset_individual, true_offset_time) if phase[0] > 0]
     
     def getLightId(self) -> str:
         return self._light_id
